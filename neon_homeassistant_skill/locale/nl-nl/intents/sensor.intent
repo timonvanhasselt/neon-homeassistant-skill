@@ -1,0 +1,3 @@
+(Wat is|Geef me|Vertel me|Geef) (de) (temperatuur|kleur|waarde|status) van (mijn) {entity} 
+is (|mijn) {entity} (aan|uit|hoog|laag|koud|warm|heet|verbonden|uitgeschakeld|open|gesloten|in beweging|bezet|ingeplugd|beveiligd|onveilig|aan het opladen|beschikbaar)
+heeft (|mijn) {entity} (een|) (vocht|energie|probleem|trilling|gas|geluid) gedetecteerd
