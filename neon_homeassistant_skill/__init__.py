@@ -50,6 +50,17 @@ class NeonHomeAssistantSkill(OVOSSkill):
             self.handle_set_light_color_response,
         )
 
+    translated_type_mapping = {
+        "switch": "schakelaar"
+    }
+
+    translated_state_mapping = {
+        "on": "aan",
+        "off": "uit"
+    }
+    
+
+
     # Handlers
     @intent_handler("sensor.intent")
     def get_device_intent(self, message):
@@ -67,20 +78,43 @@ class NeonHomeAssistantSkill(OVOSSkill):
         else:
             self.speak_dialog("no.parsed.device")
 
+    #def handle_get_device_response(self, message):
+    #    self.log.info(message.data)
+     #   device = message.data
+     #   if device:
+     #       self.speak_dialog(
+     #           "device.status",
+     #           data={
+     #              "device": device.get("attributes", {}).get("friendly_name", device.get("name")),
+     #               "type": device.get("type"),
+     #               "state": device.get("state"),
+     #           },
+     #       )
+     #   else:
+     #       self.speak_dialog("device.not.found")
+
     def handle_get_device_response(self, message):
         self.log.info(message.data)
         device = message.data
         if device:
+            # Get the translated type and state
+            english_type = device.get("type", "")
+            english_state = device.get("state", "")
+            translated_type = self.translated_type_mapping.get(english_type, english_type)
+            translated_state = self.translated_state_mapping.get(english_state, english_state)
+
             self.speak_dialog(
                 "device.status",
                 data={
                     "device": device.get("attributes", {}).get("friendly_name", device.get("name")),
-                    "type": device.get("type"),
-                    "state": device.get("state"),
+                    "type": translated_type,
+                    "state": translated_state,
                 },
             )
         else:
             self.speak_dialog("device.not.found")
+
+    
 
     @intent_handler("turn.on.intent")
     def handle_turn_on_intent(self, message) -> None:
