@@ -51,7 +51,8 @@ class NeonHomeAssistantSkill(OVOSSkill):
         )
 
     translated_type_mapping = {
-        "switch": "schakelaar"
+        "switch": "schakelaar",
+        "light": "lamp"
     }
 
     translated_state_mapping = {
